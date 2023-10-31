@@ -1,0 +1,8 @@
+boto3
+Bottleneck
+numpy
+pandas
+scikit-image
+scikit-learn
+scipy
+DateTime
