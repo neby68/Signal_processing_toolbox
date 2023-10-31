@@ -1,2 +1,5 @@
 # Signal_processing_toolbox
-tools for signal processing and example
+Tools and example for signal processing.
+
+All the documentation can be found here :
+[Signal_processing_toolbox's documentation](docs\sphinx\_build\html\index.html)
