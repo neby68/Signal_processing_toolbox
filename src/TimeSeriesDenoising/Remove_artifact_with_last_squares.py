@@ -3,7 +3,10 @@ import scipy
 import matplotlib.pyplot as plt
 import scipy.io as sio
 import os
+import sys
 
+root_path = os.path.join(os.path.dirname(__file__), "../.." )
+sys.path.append(root_path)
 
 
 
@@ -60,8 +63,11 @@ def remove_artifact_with_last_square_between_two_signals_example():
     .. image:: _static/images/TimeSeriesDenoising/color_map_eeg_eog.png
     
     """
-    data_path = os.path.join(os.path.dirname(__file__), "data")
-    data= sio.loadmat(os.path.join(data_path, 'templateProjection.mat'))
+    file_data_path = os.path.join(root_path, r"data\TimeSeriesDenoising\templateProjection.mat")
+    if not os.path.isfile(file_data_path):
+        print("\n\tFile data could not be found. Please check that you have access to it\n")
+        return
+    data= sio.loadmat(file_data_path)
     eeg_data = data["EEGdat"] #data 
     eye_data = data["eyedat"] #artifact
 

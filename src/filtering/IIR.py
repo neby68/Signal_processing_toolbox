@@ -6,93 +6,119 @@ import scipy
 import copy
 
 
-# filter parameters
-srate   = 1024 # hz
-nyquist = srate/2
-frange  = [20,45]
 
-# create filter coefficients
-fkernB,fkernA = signal.butter(5,np.array(frange)/nyquist,btype='bandpass')
+def IRR_filter():
+    """
 
-# power spectrum of filter coefficients
-filtpow = np.abs(scipy.fftpack.fft(fkernB))**2
-hz      = np.linspace(0,srate/2,int(np.floor(len(fkernB)/2)+1))
+    **1. Creation of the filter kernel using butter funtion**
 
+    The IRR filter are composed of two kernel, often call "a" and "b".
 
+    .. image:: _static/images/filtering/IIR_kernel.png
 
-"""
-As IRR kernel are from very little order (comparing to FIR)
+    **2. Analysis of the frequency response**
 
-ex. butter filter from order 4 means the Kernel signal will be composed
-    of only 4*2+1 points. 
-    These lead in only 6 point in the frequency domain.
+    .. image:: _static/images/filtering/IIR_frequency_response_wrong.png
 
-A better way to evaluate the kernel function is to filter a basic impulse response [0, 0, 1, 0, 0] 
-and take a look at its frequency response
+    As IRR kernel are from very little order (comparing to FIR)
 
-"""
+    e.g. butter filter from order 4 means the Kernel signal will be composed
+        of only 4*2+1 points. 
+        These lead in only 6 point in the frequency domain.
 
-"""
-FIR approach 
-"""
-# plotting
-plt.subplot(121)
-plt.plot(fkernB*1e5,'ks-',label='B')
-plt.plot(fkernA,'rs-',label='A')
-plt.xlabel('Time points')
-plt.ylabel('Filter coeffs.')
-plt.title('Time-domain filter coefs')
-plt.legend()
+    A better way to evaluate the kernel function is to filter a basic impulse response (arr = [0, 0, 1, 0, 0])
+    and take a look at its frequency response
 
-plt.subplot(122)
-plt.stem(hz,filtpow[0:len(hz)],'ks-')
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Power')
-plt.title('Power spectrum filter coeffs.')
-plt.show()
+    .. image:: _static/images/filtering/IIR_filter_an_Impulse.png
 
+    .. image:: _static/images/filtering/IRR_frequency_response.png
 
-"""
-IIR approach 
-"""
-## how to evaluate an IIR filter: filter an impulse
+    .. image:: _static/images/filtering/IRR_frequency_response_log.png
+    """
+    # filter parameters
+    srate   = 1024 # hz
+    nyquist = srate/2
+    frange  = np.array([20,45])
 
-# generate the impulse
-impres = np.zeros(1001)
-impres[501] = 1
+    # create filter coefficients
+    fkernB, fkernA = signal.butter(5, frange/nyquist, btype='bandpass')
 
-# apply the filter
-fimp = signal.lfilter(fkernB,fkernA,impres,axis=-1)
+    #filter
+    plt.figure()
+    plt.subplot(121)
+    plt.plot(fkernA,'rs-',label='A')
+    plt.xlabel('Time points')
+    plt.ylabel('Filter coeffs.')
+    plt.title('Butter Kernel A')
+    plt.legend()
 
-# compute power spectrum
-fimpX = np.abs(scipy.fftpack.fft(fimp))**2
-hz = np.linspace(0,nyquist,int(np.floor(len(impres)/2)+1))
+    plt.subplot(122)
+    plt.plot(fkernB*1e5,'ks-',label='B')
+    plt.xlabel('Time points')
+    plt.ylabel('Filter coeffs.')
+    plt.title('Butter Kernel B')
+    plt.legend()
+
+    
+    ######  FIR approach ######
+
+    # power spectrum of filter coefficients
+    filtpow = np.abs(scipy.fftpack.fft(fkernB))**2
+    hz = np.linspace(0,srate/2,int(np.floor(len(fkernB)/2)+1))
 
 
-# plot
-plt.plot(impres,'k',label='Impulse')
-plt.plot(fimp,'r',label='Filtered')
-plt.xlim([1,len(impres)])
-plt.ylim([-.06,.06])
-plt.legend()
-plt.xlabel('Time points (a.u.)')
-plt.title('Filtering an impulse')
-plt.show()
-
-plt.plot(hz,fimpX[0:len(hz)],'ks-')
-plt.plot([0,frange[0],frange[0],frange[1],frange[1],nyquist],[0,0,1,1,0,0],'r')
-plt.xlim([0,100])
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Attenuation')
-plt.title('Frequency response of filter (Butterworth)')
-plt.show()
+    plt.figure()
+    plt.stem(hz,filtpow[0:len(hz)],'ks-')
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('Power')
+    plt.title('Power spectrum filter coeffs.')
+    plt.show()
 
 
-plt.plot(hz,10*np.log10(fimpX[0:len(hz)]),'ks-')
-plt.xlim([0,100])
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Attenuation')
-plt.title('Frequency response of filter (Butterworth)')
-plt.show()
+    ## how to evaluate an IIR filter: filter an impulse
+    # generate the impulse
+    impres = np.zeros(1001)
+    impres[501] = 1
 
-print('end')
+    # apply the filter
+    fimp = signal.lfilter(fkernB,fkernA,impres,axis=-1)
+
+    # compute power spectrum
+    fimpX = np.abs(scipy.fftpack.fft(fimp))**2
+    hz = np.linspace(0,nyquist,int(np.floor(len(impres)/2)+1))
+
+
+    # plot
+    plt.figure()
+    plt.plot(impres,'k',label='Impulse')
+    plt.plot(fimp,'r',label='Filtered')
+    plt.xlim([1,len(impres)])
+    plt.ylim([-.06,.06])
+    plt.legend()
+    plt.xlabel('Time points (a.u.)')
+    plt.title('Filtering an impulse')
+    plt.show()
+
+    plt.figure()
+    plt.plot(hz,fimpX[0:len(hz)],'ks-')
+    plt.plot([0,frange[0],frange[0],frange[1],frange[1],nyquist],[0,0,1,1,0,0],'r')
+    plt.xlim([0,100])
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('Attenuation')
+    plt.title('Frequency response of filter (Butterworth)')
+    plt.show()
+
+    plt.figure()
+    plt.plot(hz,10*np.log10(fimpX[0:len(hz)]),'ks-')
+    plt.xlim([0,100])
+    plt.xlabel('Frequency (Hz)')
+    plt.ylabel('Attenuation (dB)')
+    plt.title('Frequency response of filter (Butterworth)')
+    plt.show()
+
+    print('end')
+
+
+
+if __name__ == "__main__":
+    IRR_filter()
