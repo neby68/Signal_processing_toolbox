@@ -49,6 +49,8 @@
 <li class="toctree-l2"><a class="reference internal" href="noise.html">noise package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Spectral_RytmicityAnalysis.html">Spectral_RytmicityAnalysis package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html">filtering package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">convolution package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html">wavelet package</a></li>
 <li class="toctree-l2"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
 <li class="toctree-l2"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
 </ul>
@@ -161,15 +163,49 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html#module-filtering.WindowedSinc_filter">filtering.WindowedSinc_filter module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.inverted_sinc_window"><code class="docutils literal notranslate"><span class="pre">inverted_sinc_window()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.sinc_passband"><code class="docutils literal notranslate"><span class="pre">sinc_passband()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.sinc_window"><code class="docutils literal notranslate"><span class="pre">sinc_window()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.filter_data_with_sinc_window_filter_example"><code class="docutils literal notranslate"><span class="pre">filter_data_with_sinc_window_filter_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.sinc_filter_example"><code class="docutils literal notranslate"><span class="pre">sinc_filter_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="filtering.html#filtering.WindowedSinc_filter.sinc_window_filter_example"><code class="docutils literal notranslate"><span class="pre">sinc_window_filter_example()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html#module-filtering.frequency_domain_normalisation">filtering.frequency_domain_normalisation module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html#module-filtering.relfection">filtering.relfection module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html#module-filtering.roll_off">filtering.roll_off module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="filtering.html#module-filtering">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="convolution.html">convolution package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html#module-convolution.kernel_intuition">convolution.kernel_intuition module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="convolution.html#convolution.kernel_intuition.convolution_intuition_kernel_mean_value"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_mean_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="convolution.html#convolution.kernel_intuition.convolution_intuition_kernel_size"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_size()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html#module-convolution.plank_taper">convolution.plank_taper module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="convolution.html#convolution.plank_taper.plank_taper_example"><code class="docutils literal notranslate"><span class="pre">plank_taper_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html#module-convolution.smoothing_filter_with_convolution">convolution.smoothing_filter_with_convolution module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="convolution.html#convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example"><code class="docutils literal notranslate"><span class="pre">smoothing_filter_convolution_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html#module-convolution">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wavelet.html">wavelet package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html#module-wavelet.spectral_analysis_wit_morlet_wavelet">wavelet.spectral_analysis_wit_morlet_wavelet module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wavelet.html#wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet"><code class="docutils literal notranslate"><span class="pre">spectrogramm_with_morlet_wavelet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html#module-wavelet.wavelet_example">wavelet.wavelet_example module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="wavelet.html#wavelet.wavelet_example.DoG_wavelet_example"><code class="docutils literal notranslate"><span class="pre">DoG_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavelet.html#wavelet.wavelet_example.haar_wavelet_example"><code class="docutils literal notranslate"><span class="pre">haar_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavelet.html#wavelet.wavelet_example.mexican_wavelet_example"><code class="docutils literal notranslate"><span class="pre">mexican_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="wavelet.html#wavelet.wavelet_example.morlet_wavelet_example"><code class="docutils literal notranslate"><span class="pre">morlet_wavelet_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html#module-wavelet">Module contents</a></li>
 </ul>
 </li>
 </ul>

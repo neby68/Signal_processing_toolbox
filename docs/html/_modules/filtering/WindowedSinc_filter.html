@@ -85,22 +85,95 @@
 
 
 
-<div class="viewcode-block" id="sinc_window"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.sinc_window">[docs]</a><span class="k">def</span> <span class="nf">sinc_window</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fc</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span></div>
+<span class="c1"># def sinc_window(x: np.ndarray, fc:int):</span>
+<span class="c1">#     return np.sinc(2 * fc * x)</span>
 
-<div class="viewcode-block" id="inverted_sinc_window"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.inverted_sinc_window">[docs]</a><span class="k">def</span> <span class="nf">inverted_sinc_window</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fc</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fc</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span></div>
+<span class="c1"># def inverted_sinc_window(x, fc):</span>
+<span class="c1">#     return 1 - np.sinc(2 * fc * x)</span>
 
-<div class="viewcode-block" id="sinc_passband"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.sinc_passband">[docs]</a><span class="k">def</span> <span class="nf">sinc_passband</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fc_low</span><span class="p">,</span> <span class="n">fc_high</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fc_high</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">fc_low</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span></div>
+<span class="c1"># def sinc_passband(x, fc_low, fc_high):</span>
+<span class="c1">#     return np.sinc(2 * fc_high * x) - np.sinc(2 * fc_low * x)</span>
 
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<div class="viewcode-block" id="sinc_filter_example"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.sinc_filter_example">[docs]</a><span class="k">def</span> <span class="nf">sinc_filter_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        \text{sinc}(t) = \frac{\sin(2 \pi f_c t)}{t}</span>
+
+<span class="sd">    with</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        f_c : \text{cut-off frequency},</span>
+<span class="sd">        t : \text{timestamps}</span>
+
+<span class="sd">    .. image:: _static/images/filtering/Sinc_kernel_and_frequency_response.png</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="c1"># simulation params</span>
     <span class="n">srate</span> <span class="o">=</span> <span class="mi">1000</span>
     <span class="n">time</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">srate</span><span class="p">)</span>
     <span class="n">pnts</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">srate</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">pnts</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># create sinc function</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">sincfilt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">/</span> <span class="n">time</span>
+
+    <span class="c1"># adjust NaN and normalize filter to unit-gain</span>
+    <span class="n">sincfilt</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
+    <span class="n">sincfilt</span> <span class="o">=</span> <span class="n">sincfilt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
+
+    <span class="c1"># plot the sinc filter</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sincfilt</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sync&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;sinc kernel&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># plot the power spectrum</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;sinc frequency response&#39;</span><span class="p">)</span>
+    <span class="n">pw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">pw</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sync&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">f</span><span class="o">*</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gain&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="sinc_window_filter_example"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.sinc_window_filter_example">[docs]</a><span class="k">def</span> <span class="nf">sinc_window_filter_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    The sinc filter can be improved by multipling a window with itself.</span>
+
+<span class="sd">    Different window exist with different caracteristics:</span>
+
+<span class="sd">    * Hann (hanning)</span>
+<span class="sd">    * Hamming</span>
+<span class="sd">    * Gaus</span>
+
+
+<span class="sd">    .. image: _static/images/filtering/Sinc_different_window.png</span>
+
+<span class="sd">    .. image: _static/images/filtering/sinc_kernel_with_different_window_zoomed.png</span>
+<span class="sd">    </span>
+<span class="sd">    .. image: _static/images/filtering/sinc_kernel_with_different_window.png</span>
+
+<span class="sd">    .. image: _static/images/filtering/sincw_frequency_response.png</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">####### Window sinc filter ##########</span>
+
+    <span class="c1"># simulation params</span>
+    <span class="n">srate</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">time</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">srate</span><span class="p">)</span>
+    <span class="n">pnts</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">srate</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">pnts</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># create sinc function</span>
     <span class="n">f</span> <span class="o">=</span> <span class="mi">5</span>
@@ -110,51 +183,89 @@
     <span class="n">sincfilt</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
     <span class="n">sincfilt</span> <span class="o">=</span> <span class="n">sincfilt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
 
-    <span class="c1"># windowed sinc filter</span>
-    <span class="n">sincfiltW</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">pnts</span><span class="p">)</span>
+    <span class="c1">## with different windowing functions</span>
 
+    <span class="n">sincfiltW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span>
+    <span class="n">tapernames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;no window&#39;</span><span class="p">,</span><span class="s1">&#39;Hann&#39;</span><span class="p">,</span><span class="s1">&#39;Hamming&#39;</span><span class="p">,</span><span class="s1">&#39;Gauss&#39;</span><span class="p">]</span>
+    
+    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span> <span class="n">sincfilt</span>
 
-    <span class="c1"># plot the sinc filter</span>
+    <span class="c1"># with Hann taper</span>
+    <span class="c1"># sincfiltW[0,:] = sincfilt * np.hanning(pnts)</span>
+    <span class="n">hannw</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">hannw</span>
+
+    <span class="c1"># with Hamming taper</span>
+    <span class="c1">#sincfiltW[1,:] = sincfilt * np.hamming(pnts)</span>
+    <span class="n">hammingw</span> <span class="o">=</span> <span class="mf">.54</span> <span class="o">-</span> <span class="mf">.46</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span>
+    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">hammingw</span>
+
+    <span class="c1"># with Gaussian taper</span>
+    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">3</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#plot the windows</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sincfilt</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Non-windowed sinc function&#39;</span><span class="p">)</span>
-
-
-    <span class="c1"># plot the power spectrum</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-    <span class="n">hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">srate</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">pnts</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">pw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">pw</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;sync&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">f</span><span class="o">*</span><span class="mi">3</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gain&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-
-
-    <span class="c1"># now plot the windowed sinc filter</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sincfiltW</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Windowed sinc function&#39;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-    <span class="n">pw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">pw</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;windowed-sync&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">f</span><span class="o">*</span><span class="mi">3</span><span class="p">])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Gain&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;different window&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">hannw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;hannw&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">hammingw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;hammingw&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;gaus&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Power&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
+    <span class="c1"># plot the kernel and frequency response</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sinc kernel with different window&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">filti</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sincfiltW</span><span class="p">[</span><span class="n">filti</span><span class="p">,:],</span>
+                  <span class="n">label</span><span class="o">=</span><span class="n">tapernames</span><span class="p">[</span><span class="n">filti</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Frequency response of window sinc&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">filti</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">)):</span>
+        <span class="n">pw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">[</span><span class="n">filti</span><span class="p">,:]))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">pw</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="n">label</span><span class="o">=</span><span class="n">tapernames</span><span class="p">[</span><span class="n">filti</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">f</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">f</span><span class="o">+</span><span class="mi">10</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Filter gain (dB)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frequency (hz)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="filter_data_with_sinc_window_filter_example"><a class="viewcode-back" href="../../filtering.html#filtering.WindowedSinc_filter.filter_data_with_sinc_window_filter_example">[docs]</a><span class="k">def</span> <span class="nf">filter_data_with_sinc_window_filter_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Example of the windowed sinc low pass filter on real signal:**</span>
+
+<span class="sd">    .. image: _static/images/filtering/Sinc_signal_filtered.png</span>
+
+<span class="sd">    .. image: _static/images/filtering/sincw_frequency_response_on_real_signal.png</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">## apply the filter to noise</span>
+    
+    <span class="c1"># simulation params</span>
+    <span class="n">srate</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">time</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">srate</span><span class="p">)</span>
+    <span class="n">pnts</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+    <span class="n">hz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">srate</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">pnts</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># create sinc function</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">sincfilt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">f</span><span class="o">*</span><span class="n">time</span><span class="p">)</span> <span class="o">/</span> <span class="n">time</span>
+
+    <span class="c1"># adjust NaN and normalize filter to unit-gain</span>
+    <span class="n">sincfilt</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
+    <span class="n">sincfilt</span> <span class="o">=</span> <span class="n">sincfilt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">)</span>
 
     <span class="c1"># generate data as integrated noise</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">pnts</span><span class="p">)</span> <span class="p">)</span>
@@ -163,8 +274,8 @@
     <span class="n">datacat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># apply filter (zero-phase-shift)</span>
-    <span class="n">dataf</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">datacat</span><span class="p">)</span>
-    <span class="n">dataf</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dataf</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">dataf</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">datacat</span><span class="p">)</span>
+    <span class="n">dataf</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">lfilter</span><span class="p">(</span><span class="n">sincfilt</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dataf</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># flip forwards and remove reflected points</span>
     <span class="n">dataf</span> <span class="o">=</span> <span class="n">dataf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">pnts</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -174,11 +285,11 @@
     <span class="n">powFilt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">dataf</span><span class="p">)</span><span class="o">/</span><span class="n">pnts</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
 
 
-
     <span class="c1"># plot</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;singal filtered&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">dataf</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Windowed-sinc filtred&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">dataf</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Windowed-sinc filtred (hanning)&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -186,7 +297,8 @@
 
 
     <span class="c1"># plot original and filtered spectra</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Frequency response&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">powOrig</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">powFilt</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Windowed-sinc filtred&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">40</span><span class="p">])</span>
@@ -194,60 +306,19 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (Hz)&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-    <span class="c1">## with different windowing functions</span>
-
-    <span class="n">sincfiltW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span>
-
-    <span class="n">tapernames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hann&#39;</span><span class="p">,</span><span class="s1">&#39;Hamming&#39;</span><span class="p">,</span><span class="s1">&#39;Gauss&#39;</span><span class="p">]</span>
-
-    <span class="c1"># with Hann taper</span>
-    <span class="c1"># sincfiltW[0,:] = sincfilt * np.hanning(pnts)</span>
-    <span class="n">hannw</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
-    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">hannw</span>
 
 
-    <span class="c1"># with Hamming taper</span>
-    <span class="c1">#sincfiltW[1,:] = sincfilt * np.hamming(pnts)</span>
-    <span class="n">hammingw</span> <span class="o">=</span> <span class="mf">.54</span> <span class="o">-</span> <span class="mf">.46</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pnts</span><span class="p">))</span>
-    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">hammingw</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># sinc_filter_example()</span>
+    <span class="c1"># sinc_window_filter_example()</span>
+    <span class="n">filter_data_with_sinc_window_filter_example</span><span class="p">()</span>
 
 
-    <span class="c1"># with Gaussian taper</span>
-    <span class="n">sincfiltW</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">sincfilt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">hannw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;hannw&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">hammingw</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;hammingw&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;gaus&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-    <span class="c1"># plot them</span>
-
-    <span class="k">for</span> <span class="n">filti</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">)):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sincfiltW</span><span class="p">[</span><span class="n">filti</span><span class="p">,:])</span>
-        
-        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-        <span class="n">pw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">fftpack</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sincfiltW</span><span class="p">[</span><span class="n">filti</span><span class="p">,:]))</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hz</span><span class="p">,</span><span class="n">pw</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">hz</span><span class="p">)],</span><span class="n">label</span><span class="o">=</span><span class="n">tapernames</span><span class="p">[</span><span class="n">filti</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="n">f</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">f</span><span class="o">+</span><span class="mi">10</span><span class="p">])</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-        
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="n">f</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r--&#39;</span><span class="p">)</span>
-    
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Filter gain (dB)&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frequency (hz)&quot;</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
            </div>

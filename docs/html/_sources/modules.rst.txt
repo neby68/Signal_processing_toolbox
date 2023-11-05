@@ -8,6 +8,8 @@ src
    noise
    Spectral_RytmicityAnalysis
    filtering
+   convolution
+   wavelet
 
 
 .. toctree::
