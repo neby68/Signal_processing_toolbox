@@ -21,7 +21,7 @@ This page may be referenced by the `Electrical and neural signal processing exam
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
    modules
 
 .. toctree::

@@ -1,37 +1,35 @@
-convolution package
-===================
+Convolution
+===========
 
-Submodules
-----------
 
-convolution.kernel\_intuition module
+
+kernel\_intuition
 ------------------------------------
 
-.. automodule:: convolution.kernel_intuition
+.. automodule:: Convolution.kernel_intuition
    :members:
    :undoc-members:
    :show-inheritance:
 
-convolution.plank\_taper module
+plank\_taper
 -------------------------------
 
-.. automodule:: convolution.plank_taper
+.. automodule:: Convolution.plank_taper
    :members:
    :undoc-members:
    :show-inheritance:
 
-convolution.smoothing\_filter\_with\_convolution module
+smoothing\_filter\_with\_convolution
 -------------------------------------------------------
 
-.. automodule:: convolution.smoothing_filter_with_convolution
+.. automodule:: Convolution.smoothing_filter_with_convolution
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: convolution
+
+.. automodule:: Convolution
    :members:
    :undoc-members:
    :show-inheritance:

@@ -8,7 +8,7 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../src'))
+sys.path.insert(0, os.path.abspath('./../src'))
 
 project = 'Signal processing tools and examples'
 copyright = '2023, Nicolas Eby'

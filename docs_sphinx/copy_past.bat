@@ -2,7 +2,7 @@
 echo Copie des dossiers en cours...
 
 rem Spécifiez les chemins complets des dossiers source et de destination
-set "sourceFolder1=C:\Users\NicolasEBY\Documents\GitHub\Signal_processing_toolbox\docs_sphinx\_build\htmt"
+set "sourceFolder1=C:\Users\NicolasEBY\Documents\GitHub\Signal_processing_toolbox\docs_sphinx\_build\html"
 set "destinationFolder=C:\Users\NicolasEBY\Documents\GitHub\Signal_processing_toolbox\docs"
 
 rem Assurez-vous que le dossier de destination existe

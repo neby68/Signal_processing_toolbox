@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TimeSeriesDenoising.Linear_detrending &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+  <title>Time_series_denoising.Linear_detrending &mdash; Signal processing tools and examples 0.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -41,7 +41,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">src</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../convolution.html">convolution package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -64,7 +66,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">TimeSeriesDenoising.Linear_detrending</li>
+      <li class="breadcrumb-item active">Time_series_denoising.Linear_detrending</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -73,14 +75,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for TimeSeriesDenoising.Linear_detrending</h1><div class="highlight"><pre>
+  <h1>Source code for Time_series_denoising.Linear_detrending</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 
 
-<div class="viewcode-block" id="linear_detrending"><a class="viewcode-back" href="../../TimeSeriesDenoising.html#TimeSeriesDenoising.Linear_detrending.linear_detrending">[docs]</a><span class="k">def</span> <span class="nf">linear_detrending</span><span class="p">(</span><span class="n">sig</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="linear_detrending"><a class="viewcode-back" href="../../Time_series_denoising.html#Time_series_denoising.Linear_detrending.linear_detrending">[docs]</a><span class="k">def</span> <span class="nf">linear_detrending</span><span class="p">(</span><span class="n">sig</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;linear detrending function</span>
 
 <span class="sd">    Args:</span>
@@ -93,7 +95,7 @@
 
 
 
-<div class="viewcode-block" id="linear_detrending_example"><a class="viewcode-back" href="../../TimeSeriesDenoising.html#TimeSeriesDenoising.Linear_detrending.linear_detrending_example">[docs]</a><span class="k">def</span> <span class="nf">linear_detrending_example</span><span class="p">():</span>
+<div class="viewcode-block" id="linear_detrending_example"><a class="viewcode-back" href="../../Time_series_denoising.html#Time_series_denoising.Linear_detrending.linear_detrending_example">[docs]</a><span class="k">def</span> <span class="nf">linear_detrending_example</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;example of linear detrending usage</span>
 
 <span class="sd">    Remove the general trend of the data.</span>

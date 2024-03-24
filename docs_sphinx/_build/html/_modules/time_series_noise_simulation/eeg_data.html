@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time_series_noise_simulation.eeg_data &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=525cde36"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Signal processing tools and examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../convolution.html">convolution package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Signal processing tools and examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Time_series_noise_simulation.eeg_data</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Time_series_noise_simulation.eeg_data</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+
+<div class="viewcode-block" id="topoplot_indie"><a class="viewcode-back" href="../../Time_series_noise_simulation.html#Time_series_noise_simulation.eeg_data.topoplot_indie">[docs]</a><span class="k">def</span> <span class="nf">topoplot_indie</span><span class="p">(</span><span class="n">Values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">chanlocs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span> <span class="n">headrad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> 
+                   <span class="n">grid_scale</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">67</span><span class="p">,</span> <span class="n">circgrid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">201</span><span class="p">,</span> <span class="n">headcolor</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                   <span class="n">hlinewidth</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.7</span><span class="p">,</span> <span class="n">blankingringwidth</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.035</span><span class="p">,</span> <span class="n">headringwidth</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.007</span><span class="p">,</span> 
+                   <span class="n">plotrad</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">shading</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;interp&#39;</span><span class="p">,</span> <span class="n">contournum</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">electrodes</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;on&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot topographic map of independent values on scalp.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - Values (numpy.ndarray): Independent values for each electrode.</span>
+<span class="sd">    - chanlocs (List[dict]): List of dictionaries containing channel locations.</span>
+<span class="sd">    - headrad (float): Actual head radius.</span>
+<span class="sd">    - grid_scale (int): Number of points in the grid for plotting.</span>
+<span class="sd">    - circgrid (int): Number of angles to use in drawing circles.</span>
+<span class="sd">    - headcolor (List[int]): RGB values for the default head color.</span>
+<span class="sd">    - hlinewidth (float): Default linewidth for head, nose, and ears.</span>
+<span class="sd">    - blankingringwidth (float): Width of the blanking ring.</span>
+<span class="sd">    - headringwidth (float): Width of the cartoon head ring.</span>
+<span class="sd">    - plotrad (float): Radius of the plotting circle.</span>
+<span class="sd">    - shading (str): Shading type (&#39;flat&#39; or &#39;interp&#39;).</span>
+<span class="sd">    - contournum (int): Number of contours in the plot.</span>
+<span class="sd">    - electrodes (str): Display mode for electrodes (&#39;on&#39;, &#39;labels&#39;, &#39;numbers&#39;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - handle (plt.Axes): Matplotlib Axes object.</span>
+<span class="sd">    - pltchans (List[int]): Indices of channels plotted.</span>
+<span class="sd">    - epos (numpy.ndarray): Electrode positions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Set defaults</span>
+    <span class="n">GRID_SCALE</span> <span class="o">=</span> <span class="n">grid_scale</span>
+    <span class="n">CIRCGRID</span> <span class="o">=</span> <span class="n">circgrid</span>
+    <span class="n">HEADCOLOR</span> <span class="o">=</span> <span class="n">headcolor</span>
+    <span class="n">HLINEWIDTH</span> <span class="o">=</span> <span class="n">hlinewidth</span>
+    <span class="n">BLANKINGRINGWIDTH</span> <span class="o">=</span> <span class="n">blankingringwidth</span>
+    <span class="n">HEADRINGWIDTH</span> <span class="o">=</span> <span class="n">headringwidth</span>
+
+    <span class="n">plotrad</span> <span class="o">=</span> <span class="n">plotrad</span>
+    <span class="n">Values</span> <span class="o">=</span> <span class="n">Values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">shading</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;flat&#39;</span><span class="p">,</span> <span class="s1">&#39;interp&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid shading parameter&#39;</span><span class="p">)</span>
+
+    <span class="n">Values</span> <span class="o">=</span> <span class="n">Values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>  <span class="c1"># make Values a column vector</span>
+
+    <span class="c1"># Read channel location</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">chan</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanlocs</span><span class="p">]</span>
+    <span class="n">Th</span> <span class="o">=</span> <span class="p">[</span><span class="n">chan</span><span class="p">[</span><span class="s1">&#39;theta&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanlocs</span><span class="p">]</span>
+    <span class="n">Rd</span> <span class="o">=</span> <span class="p">[</span><span class="n">chan</span><span class="p">[</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanlocs</span><span class="p">]</span>
+
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">Th</span><span class="p">)</span>  <span class="c1"># convert degrees to radians</span>
+    <span class="n">allchansind</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Th</span><span class="p">)))</span>
+    <span class="n">plotchans</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chanlocs</span><span class="p">)))</span>
+
+    <span class="c1"># Remove infinite and NaN values</span>
+    <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">union1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Values</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">Values</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># NaN and Inf values</span>
+    <span class="k">for</span> <span class="n">chani</span><span class="p">,</span> <span class="n">chanloc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chanlocs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">chanloc</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+            <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">chani</span><span class="p">)</span>
+
+    <span class="n">plotchans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">plotchans</span><span class="p">,</span> <span class="n">inds</span><span class="p">)</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pol2cart</span><span class="p">(</span><span class="n">Th</span><span class="p">,</span> <span class="n">Rd</span><span class="p">)</span>  <span class="c1"># transform electrode locations from polar to cartesian coordinates</span>
+    <span class="n">plotchans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">plotchans</span><span class="p">)</span>  <span class="c1"># reverse indicated channel polarities</span>
+    <span class="n">allchansind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">allchansind</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Th</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">Rd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Rd</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">)[</span><span class="n">plotchans</span><span class="p">]</span>  <span class="c1"># remove labels for electrodes without locations</span>
+    <span class="n">Values</span> <span class="o">=</span> <span class="n">Values</span><span class="p">[</span><span class="n">plotchans</span><span class="p">]</span>
+    <span class="n">intrad</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">Rd</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.02</span><span class="p">)</span>  <span class="c1"># default: just outside the outermost electrode location</span>
+
+    <span class="c1"># Find plotting channels</span>
+    <span class="n">pltchans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Rd</span> <span class="o">&lt;=</span> <span class="n">plotrad</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># plot channels inside plotting circle</span>
+    <span class="n">intchans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">intrad</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="n">intrad</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># interpolate and plot channels inside interpolation square</span>
+
+    <span class="c1"># Eliminate channels not plotted</span>
+    <span class="n">allx</span><span class="p">,</span> <span class="n">ally</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+    <span class="n">allchansind</span> <span class="o">=</span> <span class="n">allchansind</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>
+    <span class="n">intTh</span> <span class="o">=</span> <span class="n">Th</span><span class="p">[</span><span class="n">intchans</span><span class="p">]</span>  <span class="c1"># eliminate channels outside the interpolation area</span>
+    <span class="n">intRd</span> <span class="o">=</span> <span class="n">Rd</span><span class="p">[</span><span class="n">intchans</span><span class="p">]</span>
+    <span class="n">intx</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">intchans</span><span class="p">]</span>
+    <span class="n">inty</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">intchans</span><span class="p">]</span>
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">Th</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>  <span class="c1"># eliminate channels outside the plotting area</span>
+    <span class="n">Rd</span> <span class="o">=</span> <span class="n">Rd</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>
+
+    <span class="n">intValues</span> <span class="o">=</span> <span class="n">Values</span><span class="p">[</span><span class="n">intchans</span><span class="p">]</span>
+    <span class="n">Values</span> <span class="o">=</span> <span class="n">Values</span><span class="p">[</span><span class="n">pltchans</span><span class="p">]</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="c1"># Squeeze channel locations to &lt;= headrad</span>
+    <span class="n">squeezefac</span> <span class="o">=</span> <span class="n">headrad</span> <span class="o">/</span> <span class="n">plotrad</span>
+    <span class="n">intRd</span> <span class="o">=</span> <span class="n">intRd</span> <span class="o">*</span> <span class="n">squeezefac</span>  <span class="c1"># squeeze electrode arc_lengths towards the vertex</span>
+    <span class="n">Rd</span> <span class="o">=</span> <span class="n">Rd</span> <span class="o">*</span> <span class="n">squeezefac</span>  <span class="c1"># squeeze electrode arc_lengths towards the vertex</span>
+    <span class="n">intx</span> <span class="o">=</span> <span class="n">intx</span> <span class="o">*</span> <span class="n">squeezefac</span>
+    <span class="n">inty</span> <span class="o">=</span> <span class="n">inty</span> <span class="o">*</span> <span class="n">squeezefac</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">squeezefac</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">squeezefac</span>
+    <span class="n">allx</span> <span class="o">=</span> <span class="n">allx</span> <span class="o">*</span> <span class="n">squeezefac</span>
+    <span class="n">ally</span> <span class="o">=</span> <span class="n">ally</span> <span class="o">*</span> <span class="n">squeezefac</span>
+
+    <span class="c1"># Create grid</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">headrad</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">intx</span><span class="p">)),</span> <span class="nb">max</span><span class="p">(</span><span class="n">headrad</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">intx</span><span class="p">))</span>
+    <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span><span class="n">headrad</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">inty</span><span class="p">)),</span> <span class="nb">max</span><span class="p">(</span><span class="n">headrad</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">inty</span><span class="p">))</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">GRID_SCALE</span><span class="p">)</span>  <span class="c1"># x-axis description (row vector)</span>
+    <span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">GRID_SCALE</span><span class="p">)</span>  <span class="c1"># y-axis description (row vector)</span>
+
+    <span class="n">Xi</span><span class="p">,</span> <span class="n">Yi</span><span class="p">,</span> <span class="n">Zi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">interp_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">inty</span><span class="p">,</span> <span class="n">intValues</span><span class="p">)</span>  <span class="c1"># interpolate data</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">GRID_SCALE</span><span class="p">):</span>
+        <span class="n">Zi</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">interp_values</span>
+
+    <span class="c1"># Mask out data outside the head</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Xi</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">Yi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">headrad</span>  <span class="c1"># mask outside the plotting circle</span>
+    <span class="n">Zi</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>  <span class="c1"># mask non-plotting voxels with NaNs</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">plotrad</span>  <span class="c1"># unless &#39;noplot&#39;, then 3rd output arg is plotrad</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">xi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># length of grid entry</span>
+
+    <span class="c1"># Scale the axes and make the plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>  <span class="c1"># clear current axis</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>  <span class="c1"># uses current axes</span>
+    <span class="n">AXHEADFAC</span> <span class="o">=</span> <span class="mf">1.05</span>  <span class="c1"># do not leave room for external ears if head cartoon</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="n">headrad</span> <span class="o">*</span> <span class="n">AXHEADFAC</span><span class="p">,</span> <span class="n">headrad</span> <span class="o">*</span> <span class="n">AXHEADFAC</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="n">headrad</span> <span class="o">*</span> <span class="n">AXHEADFAC</span><span class="p">,</span> <span class="n">headrad</span> <span class="o">*</span> <span class="n">AXHEADFAC</span><span class="p">])</span>
+    <span class="n">unsh</span> <span class="o">=</span> <span class="p">(</span><span class="n">GRID_SCALE</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">GRID_SCALE</span>  <span class="c1"># un-shrink the effects of &#39;interp&#39; SHADING</span>
+
+    <span class="k">if</span> <span class="n">shading</span> <span class="o">==</span> <span class="s1">&#39;interp&#39;</span><span class="p">:</span>
+        <span class="n">handle</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">Xi</span> <span class="o">*</span> <span class="n">unsh</span><span class="p">,</span> <span class="n">Yi</span> <span class="o">*</span> <span class="n">unsh</span><span class="p">,</span> <span class="n">Zi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">shading</span><span class="o">=</span><span class="n">shading</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">handle</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">Xi</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Yi</span> <span class="o">-</span> <span class="n">delta</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">Zi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">shading</span><span class="o">=</span><span class="n">shading</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span> <span class="n">Yi</span><span class="p">,</span> <span class="n">Zi</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">CONTOURNUM</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">hittest</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Plot filled ring to mask jagged grid boundary</span>
+    <span class="n">hwidth</span> <span class="o">=</span> <span class="n">HEADRINGWIDTH</span>  <span class="c1"># width of head ring</span>
+    <span class="n">hin</span> <span class="o">=</span> <span class="n">squeezefac</span> <span class="o">*</span> <span class="n">headrad</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">hwidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># inner head ring radius</span>
+
+    <span class="k">if</span> <span class="n">shading</span> <span class="o">==</span> <span class="s1">&#39;interp&#39;</span><span class="p">:</span>
+        <span class="n">rwidth</span> <span class="o">=</span> <span class="n">BLANKINGRINGWIDTH</span> <span class="o">*</span> <span class="mf">1.3</span>  <span class="c1"># width of blanking outer ring</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rwidth</span> <span class="o">=</span> <span class="n">BLANKINGRINGWIDTH</span>  <span class="c1"># width of blanking outer ring</span>
+
+    <span class="n">rin</span> <span class="o">=</span> <span class="n">headrad</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">rwidth</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># inner ring radius</span>
+    <span class="k">if</span> <span class="n">hin</span> <span class="o">&gt;</span> <span class="n">rin</span><span class="p">:</span>
+        <span class="n">rin</span> <span class="o">=</span> <span class="n">hin</span>  <span class="c1"># don&#39;t blank inside the head ring</span>
+
+    <span class="n">circ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">CIRCGRID</span><span class="p">)</span>
+    <span class="n">rx</span><span class="p">,</span> <span class="n">ry</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">circ</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">circ</span><span class="p">)</span>
+    <span class="n">ringx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">rx</span> <span class="o">*</span> <span class="p">(</span><span class="n">rin</span> <span class="o">+</span> <span class="n">rwidth</span><span class="p">),</span> <span class="n">rx</span> <span class="o">*</span> <span class="n">rin</span><span class="p">])</span>
+    <span class="n">ringy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">ry</span> <span class="o">*</span> <span class="p">(</span><span class="n">rin</span> <span class="o">+</span> <span class="n">rwidth</span><span class="p">),</span> <span class="n">ry</span> <span class="o">*</span> <span class="n">rin</span><span class="p">])</span>
+    <span class="n">ringh</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">ringx</span><span class="p">,</span> <span class="n">ringy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># plot the filled ring to mask jagged grid boundary</span>
+
+    <span class="c1"># Plot cartoon head, ears, nose</span>
+    <span class="n">headx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">rx</span> <span class="o">*</span> <span class="p">(</span><span class="n">hin</span> <span class="o">+</span> <span class="n">hwidth</span><span class="p">),</span> <span class="n">rx</span> <span class="o">*</span> <span class="n">hin</span><span class="p">])</span>
+    <span class="n">heady</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">ry</span> <span class="o">*</span> <span class="p">(</span><span class="n">hin</span> <span class="o">+</span> <span class="n">hwidth</span><span class="p">),</span> <span class="n">ry</span> <span class="o">*</span> <span class="n">hin</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">headx</span><span class="p">,</span> <span class="n">heady</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">HEADCOLOR</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="n">HEADCOLOR</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># plot the filled cartoon head</span>
+
+    <span class="c1"># Plot ears and nose</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="n">headrad</span> <span class="o">-</span> <span class="mf">0.0046</span>
+    <span class="n">basex</span> <span class="o">=</span> <span class="mf">0.18</span> <span class="o">*</span> <span class="n">headrad</span>  <span class="c1"># nose width</span>
+    <span class="n">tip</span> <span class="o">=</span> <span class="mf">1.15</span> <span class="o">*</span> <span class="n">headrad</span>
+    <span class="n">tiphw</span> <span class="o">=</span> <span class="mf">0.04</span> <span class="o">*</span> <span class="n">headrad</span>  <span class="c1"># nose tip half width</span>
+    <span class="n">tipr</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">headrad</span>  <span class="c1"># nose tip rounding</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mf">0.04</span>  <span class="c1"># ear lengthening</span>
+    <span class="n">earx</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.497</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.510</span><span class="p">,</span> <span class="mf">0.518</span><span class="p">,</span> <span class="mf">0.5299</span><span class="p">,</span> <span class="mf">0.5419</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">,</span> <span class="mf">0.547</span><span class="p">,</span> <span class="mf">0.532</span><span class="p">,</span> <span class="mf">0.510</span><span class="p">,</span> <span class="mf">0.489</span> <span class="o">-</span> <span class="mf">0.005</span><span class="p">]</span>  <span class="c1"># headrad = 0.5</span>
+    <span class="n">eary</span> <span class="o">=</span> <span class="p">[</span><span class="n">q</span> <span class="o">+</span> <span class="mf">0.0555</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.0775</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.0783</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.0746</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mf">0.0555</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0055</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0932</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1313</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1384</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1199</span><span class="p">]</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="n">headrad</span> <span class="o">/</span> <span class="n">plotrad</span>  <span class="c1"># squeeze the model ears and nose by this factor</span>
+    <span class="n">earx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">earx</span><span class="p">)</span> <span class="o">*</span> <span class="n">sf</span>
+    <span class="n">eary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">eary</span><span class="p">)</span> <span class="o">*</span> <span class="n">sf</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">earx</span><span class="p">,</span> <span class="n">eary</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">HLINEWIDTH</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># plot left ear</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="n">earx</span><span class="p">,</span> <span class="n">eary</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">HLINEWIDTH</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># plot right ear</span>
+
+    <span class="c1"># Mark electrode locations</span>
+    <span class="k">if</span> <span class="n">electrodes</span> <span class="o">==</span> <span class="s1">&#39;on&#39;</span><span class="p">:</span>  <span class="c1"># plot electrodes as spots</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">electrodes</span> <span class="o">==</span> <span class="s1">&#39;labels&#39;</span><span class="p">:</span>  <span class="c1"># print electrode names (labels)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">label</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">electrodes</span> <span class="o">==</span> <span class="s1">&#39;numbers&#39;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chanind</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">allchansind</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">chanind</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;middle&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+    <span class="n">epos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ax</span><span class="p">,</span> <span class="n">allchansind</span><span class="p">,</span> <span class="n">epos</span></div>
+
+<span class="c1"># Example usage:</span>
+<span class="c1"># topoplot_indie(Values, chanlocs)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+        
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
+
+    <span class="c1"># (Assuming the topoplot_indie function is available here)</span>
+
+    <span class="c1"># Load sample EEG data</span>
+    <span class="n">mat_data</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;src\time_series_noise_simulation\sampleEEGdata.mat&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Explore the data</span>
+    <span class="n">EEG</span> <span class="o">=</span> <span class="n">mat_data</span><span class="p">[</span><span class="s1">&#39;EEG&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Plot ERPs</span>
+    <span class="n">erp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">EEG</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Pick a channel and plot ERP</span>
+    <span class="n">chan2plot</span> <span class="o">=</span> <span class="s1">&#39;fcz&#39;</span>
+    <span class="n">chan_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">EEG</span><span class="p">[</span><span class="s1">&#39;chanlocs&#39;</span><span class="p">][</span><span class="s1">&#39;labels&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">chan2plot</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">EEG</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">erp</span><span class="p">[</span><span class="n">chan_idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (ms)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (uV)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ERP for Channel </span><span class="si">{</span><span class="n">chan2plot</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Plot topographical maps</span>
+    <span class="n">time2plot</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># in ms</span>
+
+    <span class="c1"># Convert time in ms to time in indices</span>
+    <span class="n">tidx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">EEG</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">time2plot</span><span class="p">))</span>
+
+    <span class="c1"># Get the values for the topoplot from the ERP</span>
+    <span class="n">values_for_topoplot</span> <span class="o">=</span> <span class="n">erp</span><span class="p">[:,</span> <span class="n">tidx</span><span class="p">]</span>
+
+    <span class="c1"># Plot topographical map</span>
+    <span class="n">ax</span><span class="p">,</span> <span class="n">pltchans</span><span class="p">,</span> <span class="n">epos</span> <span class="o">=</span> <span class="n">topoplot_indie</span><span class="p">(</span><span class="n">values_for_topoplot</span><span class="p">,</span> <span class="n">EEG</span><span class="p">[</span><span class="s1">&#39;chanlocs&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Additional customization for the topoplot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Topographical Map at </span><span class="si">{</span><span class="n">time2plot</span><span class="si">}</span><span class="s1"> ms&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Nicolas Eby.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

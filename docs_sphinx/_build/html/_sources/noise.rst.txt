@@ -1,21 +1,20 @@
-noise package
-=============
+Noise
+=====
 
-Submodules
-----------
 
-noise.type\_of\_noise module
+
+type\_of\_noise
 ----------------------------
 
-.. automodule:: noise.type_of_noise
+.. automodule:: Noise.type_of_noise
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: noise
+
+
+.. automodule:: Noise
    :members:
    :undoc-members:
    :show-inheritance:

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>convolution package &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+  <title>Convolution &mdash; Signal processing tools and examples 0.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="wavelet package" href="wavelet.html" />
-    <link rel="prev" title="filtering package" href="filtering.html" /> 
+    <link rel="next" title="Wavelet" href="Wavelet.html" />
+    <link rel="prev" title="Filtering" href="Filtering.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,34 +45,28 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="TimeSeriesDenoising.html">TimeSeriesDenoising package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="noise.html">noise package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spectral_RytmicityAnalysis.html">Spectral_RytmicityAnalysis package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filtering.html">filtering package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">convolution package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-convolution.kernel_intuition">convolution.kernel_intuition module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convolution.kernel_intuition.convolution_intuition_kernel_mean_value"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_mean_value()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#convolution.kernel_intuition.convolution_intuition_kernel_size"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_size()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Time_series_denoising.html">Time_series_denoising</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Noise.html">Noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Spectral_rytmicity_analysis.html">Spectral_rytmicity_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Filtering.html">Filtering</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Convolution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-Convolution.kernel_intuition">kernel_intuition</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Convolution.kernel_intuition.convolution_intuition_kernel_mean_value"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_mean_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Convolution.kernel_intuition.convolution_intuition_kernel_size"><code class="docutils literal notranslate"><span class="pre">convolution_intuition_kernel_size()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-convolution.plank_taper">convolution.plank_taper module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convolution.plank_taper.plank_taper_example"><code class="docutils literal notranslate"><span class="pre">plank_taper_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Convolution.plank_taper">plank_taper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Convolution.plank_taper.plank_taper_example"><code class="docutils literal notranslate"><span class="pre">plank_taper_example()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-convolution.smoothing_filter_with_convolution">convolution.smoothing_filter_with_convolution module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example"><code class="docutils literal notranslate"><span class="pre">smoothing_filter_convolution_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Convolution.smoothing_filter_with_convolution">smoothing_filter_with_convolution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example"><code class="docutils literal notranslate"><span class="pre">smoothing_filter_convolution_example()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-convolution">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="wavelet.html">wavelet package</a></li>
-<li class="toctree-l2"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
-<li class="toctree-l2"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="Wavelet.html">Wavelet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Time_series_noise_simulation.html">Time_series_noise_simulation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -94,10 +88,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
-      <li class="breadcrumb-item active">convolution package</li>
+          <li class="breadcrumb-item"><a href="modules.html">&lt;no title&gt;</a></li>
+      <li class="breadcrumb-item active">Convolution</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/convolution.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/Convolution.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -105,16 +99,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="convolution-package">
-<h1>convolution package<a class="headerlink" href="#convolution-package" title="Permalink to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
-</section>
-<section id="module-convolution.kernel_intuition">
-<span id="convolution-kernel-intuition-module"></span><h2>convolution.kernel_intuition module<a class="headerlink" href="#module-convolution.kernel_intuition" title="Permalink to this heading"></a></h2>
+  <section id="convolution">
+<h1>Convolution<a class="headerlink" href="#convolution" title="Permalink to this heading"></a></h1>
+<section id="module-Convolution.kernel_intuition">
+<span id="kernel-intuition"></span><h2>kernel_intuition<a class="headerlink" href="#module-Convolution.kernel_intuition" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="convolution.kernel_intuition.convolution_intuition_kernel_mean_value">
-<span class="sig-name descname"><span class="pre">convolution_intuition_kernel_mean_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/convolution/kernel_intuition.html#convolution_intuition_kernel_mean_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#convolution.kernel_intuition.convolution_intuition_kernel_mean_value" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Convolution.kernel_intuition.convolution_intuition_kernel_mean_value">
+<span class="sig-name descname"><span class="pre">convolution_intuition_kernel_mean_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Convolution/kernel_intuition.html#convolution_intuition_kernel_mean_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Convolution.kernel_intuition.convolution_intuition_kernel_mean_value" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Effect of the kernel mean_value</strong></p>
 <p><strong>1. Kernel mean value is positive</strong></p>
 <video width="800" height="360" controls>
@@ -131,8 +122,8 @@
 </video></dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="convolution.kernel_intuition.convolution_intuition_kernel_size">
-<span class="sig-name descname"><span class="pre">convolution_intuition_kernel_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/convolution/kernel_intuition.html#convolution_intuition_kernel_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#convolution.kernel_intuition.convolution_intuition_kernel_size" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Convolution.kernel_intuition.convolution_intuition_kernel_size">
+<span class="sig-name descname"><span class="pre">convolution_intuition_kernel_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Convolution/kernel_intuition.html#convolution_intuition_kernel_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Convolution.kernel_intuition.convolution_intuition_kernel_size" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Effect of the kernel size</strong></p>
 <p><strong>1. Large gaussian width</strong></p>
 <img alt="_images/convolution_first_intuition_large_kernel.png" src="_images/convolution_first_intuition_large_kernel.png" />
@@ -141,11 +132,11 @@
 </dd></dl>
 
 </section>
-<section id="module-convolution.plank_taper">
-<span id="convolution-plank-taper-module"></span><h2>convolution.plank_taper module<a class="headerlink" href="#module-convolution.plank_taper" title="Permalink to this heading"></a></h2>
+<section id="module-Convolution.plank_taper">
+<span id="plank-taper"></span><h2>plank_taper<a class="headerlink" href="#module-Convolution.plank_taper" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="convolution.plank_taper.plank_taper_example">
-<span class="sig-name descname"><span class="pre">plank_taper_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/convolution/plank_taper.html#plank_taper_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#convolution.plank_taper.plank_taper_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Convolution.plank_taper.plank_taper_example">
+<span class="sig-name descname"><span class="pre">plank_taper_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Convolution/plank_taper.html#plank_taper_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Convolution.plank_taper.plank_taper_example" title="Permalink to this definition"></a></dt>
 <dd><p><strong>create a plank taper kernel as passband filter</strong></p>
 <img alt="_images/plank_taper.png" src="_images/plank_taper.png" />
 <img alt="_images/fsingal_plank.png" src="_images/fsingal_plank.png" />
@@ -153,11 +144,11 @@
 </dd></dl>
 
 </section>
-<section id="module-convolution.smoothing_filter_with_convolution">
-<span id="convolution-smoothing-filter-with-convolution-module"></span><h2>convolution.smoothing_filter_with_convolution module<a class="headerlink" href="#module-convolution.smoothing_filter_with_convolution" title="Permalink to this heading"></a></h2>
+<section id="module-Convolution.smoothing_filter_with_convolution">
+<span id="smoothing-filter-with-convolution"></span><h2>smoothing_filter_with_convolution<a class="headerlink" href="#module-Convolution.smoothing_filter_with_convolution" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example">
-<span class="sig-name descname"><span class="pre">smoothing_filter_convolution_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/convolution/smoothing_filter_with_convolution.html#smoothing_filter_convolution_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example">
+<span class="sig-name descname"><span class="pre">smoothing_filter_convolution_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Convolution/smoothing_filter_with_convolution.html#smoothing_filter_convolution_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Convolution.smoothing_filter_with_convolution.smoothing_filter_convolution_example" title="Permalink to this definition"></a></dt>
 <dd><p><strong>Smoothing filter and convolution theorem</strong></p>
 <p><strong>A convolution in the time domain in equal to a multiplication in the frequency domain</strong></p>
 <dl>
@@ -171,18 +162,15 @@
 <img alt="_images/smoothing_filter.png" src="_images/smoothing_filter.png" />
 </dd></dl>
 
-</section>
-<section id="module-convolution">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-convolution" title="Permalink to this heading"></a></h2>
-</section>
+<span class="target" id="module-Convolution"></span></section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="filtering.html" class="btn btn-neutral float-left" title="filtering package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="wavelet.html" class="btn btn-neutral float-right" title="wavelet package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Filtering.html" class="btn btn-neutral float-left" title="Filtering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Wavelet.html" class="btn btn-neutral float-right" title="Wavelet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

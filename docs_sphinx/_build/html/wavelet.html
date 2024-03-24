@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>wavelet package &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+  <title>Wavelet &mdash; Signal processing tools and examples 0.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="time_series_noise_simulation package" href="time_series_noise_simulation.html" />
-    <link rel="prev" title="convolution package" href="convolution.html" /> 
+    <link rel="next" title="Time_series_noise_simulation" href="Time_series_noise_simulation.html" />
+    <link rel="prev" title="Convolution" href="Convolution.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,33 +44,26 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="TimeSeriesDenoising.html">TimeSeriesDenoising package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="noise.html">noise package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spectral_RytmicityAnalysis.html">Spectral_RytmicityAnalysis package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filtering.html">filtering package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="convolution.html">convolution package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">wavelet package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-wavelet.spectral_analysis_wit_morlet_wavelet">wavelet.spectral_analysis_wit_morlet_wavelet module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet"><code class="docutils literal notranslate"><span class="pre">spectrogramm_with_morlet_wavelet()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Time_series_denoising.html">Time_series_denoising</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Noise.html">Noise</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Spectral_rytmicity_analysis.html">Spectral_rytmicity_analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Filtering.html">Filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Convolution.html">Convolution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Wavelet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-Wavelet.spectral_analysis_wit_morlet_wavelet">spectral_analysis_wit_morlet_wavelet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet"><code class="docutils literal notranslate"><span class="pre">spectrogramm_with_morlet_wavelet()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-wavelet.wavelet_example">wavelet.wavelet_example module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#wavelet.wavelet_example.DoG_wavelet_example"><code class="docutils literal notranslate"><span class="pre">DoG_wavelet_example()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#wavelet.wavelet_example.haar_wavelet_example"><code class="docutils literal notranslate"><span class="pre">haar_wavelet_example()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#wavelet.wavelet_example.mexican_wavelet_example"><code class="docutils literal notranslate"><span class="pre">mexican_wavelet_example()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#wavelet.wavelet_example.morlet_wavelet_example"><code class="docutils literal notranslate"><span class="pre">morlet_wavelet_example()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-Wavelet.wavelet_example">wavelet_example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Wavelet.wavelet_example.DoG_wavelet_example"><code class="docutils literal notranslate"><span class="pre">DoG_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Wavelet.wavelet_example.haar_wavelet_example"><code class="docutils literal notranslate"><span class="pre">haar_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Wavelet.wavelet_example.mexican_wavelet_example"><code class="docutils literal notranslate"><span class="pre">mexican_wavelet_example()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Wavelet.wavelet_example.morlet_wavelet_example"><code class="docutils literal notranslate"><span class="pre">morlet_wavelet_example()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-wavelet">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="time_series_noise_simulation.html">time_series_noise_simulation package</a></li>
-<li class="toctree-l2"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
-<li class="toctree-l2"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="Time_series_noise_simulation.html">Time_series_noise_simulation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -92,10 +85,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
-      <li class="breadcrumb-item active">wavelet package</li>
+          <li class="breadcrumb-item"><a href="modules.html">&lt;no title&gt;</a></li>
+      <li class="breadcrumb-item active">Wavelet</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/wavelet.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/Wavelet.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -103,16 +96,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="wavelet-package">
-<h1>wavelet package<a class="headerlink" href="#wavelet-package" title="Permalink to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
-</section>
-<section id="module-wavelet.spectral_analysis_wit_morlet_wavelet">
-<span id="wavelet-spectral-analysis-wit-morlet-wavelet-module"></span><h2>wavelet.spectral_analysis_wit_morlet_wavelet module<a class="headerlink" href="#module-wavelet.spectral_analysis_wit_morlet_wavelet" title="Permalink to this heading"></a></h2>
+  <section id="wavelet">
+<h1>Wavelet<a class="headerlink" href="#wavelet" title="Permalink to this heading"></a></h1>
+<section id="module-Wavelet.spectral_analysis_wit_morlet_wavelet">
+<span id="spectral-analysis-wit-morlet-wavelet"></span><h2>spectral_analysis_wit_morlet_wavelet<a class="headerlink" href="#module-Wavelet.spectral_analysis_wit_morlet_wavelet" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet">
-<span class="sig-name descname"><span class="pre">spectrogramm_with_morlet_wavelet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wavelet/spectral_analysis_wit_morlet_wavelet.html#spectrogramm_with_morlet_wavelet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet">
+<span class="sig-name descname"><span class="pre">spectrogramm_with_morlet_wavelet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Wavelet/spectral_analysis_wit_morlet_wavelet.html#spectrogramm_with_morlet_wavelet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Wavelet.spectral_analysis_wit_morlet_wavelet.spectrogramm_with_morlet_wavelet" title="Permalink to this definition"></a></dt>
 <dd><p>Spectogramm by doing a convolution between the raw signal and complex morlet wavelet:</p>
 <dl>
 <dt><strong>Method:</strong></dt><dd><p>Create multiple complex morlet wavelet from different frequency.
@@ -171,44 +161,41 @@ and multiply fft(raw_signal) with fft(complex_morlet_wavelet[i])</p>
 </dd></dl>
 
 </section>
-<section id="module-wavelet.wavelet_example">
-<span id="wavelet-wavelet-example-module"></span><h2>wavelet.wavelet_example module<a class="headerlink" href="#module-wavelet.wavelet_example" title="Permalink to this heading"></a></h2>
+<section id="module-Wavelet.wavelet_example">
+<span id="wavelet-example"></span><h2>wavelet_example<a class="headerlink" href="#module-Wavelet.wavelet_example" title="Permalink to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="wavelet.wavelet_example.DoG_wavelet_example">
-<span class="sig-name descname"><span class="pre">DoG_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wavelet/wavelet_example.html#DoG_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wavelet.wavelet_example.DoG_wavelet_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Wavelet.wavelet_example.DoG_wavelet_example">
+<span class="sig-name descname"><span class="pre">DoG_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Wavelet/wavelet_example.html#DoG_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Wavelet.wavelet_example.DoG_wavelet_example" title="Permalink to this definition"></a></dt>
 <dd><img alt="_images/DoG_wavelet.png" src="_images/DoG_wavelet.png" />
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wavelet.wavelet_example.haar_wavelet_example">
-<span class="sig-name descname"><span class="pre">haar_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wavelet/wavelet_example.html#haar_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wavelet.wavelet_example.haar_wavelet_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Wavelet.wavelet_example.haar_wavelet_example">
+<span class="sig-name descname"><span class="pre">haar_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Wavelet/wavelet_example.html#haar_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Wavelet.wavelet_example.haar_wavelet_example" title="Permalink to this definition"></a></dt>
 <dd><img alt="_images/haar_wavelet.png" src="_images/haar_wavelet.png" />
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wavelet.wavelet_example.mexican_wavelet_example">
-<span class="sig-name descname"><span class="pre">mexican_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wavelet/wavelet_example.html#mexican_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wavelet.wavelet_example.mexican_wavelet_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Wavelet.wavelet_example.mexican_wavelet_example">
+<span class="sig-name descname"><span class="pre">mexican_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Wavelet/wavelet_example.html#mexican_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Wavelet.wavelet_example.mexican_wavelet_example" title="Permalink to this definition"></a></dt>
 <dd><img alt="_images/mexican_wavelet.png" src="_images/mexican_wavelet.png" />
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="wavelet.wavelet_example.morlet_wavelet_example">
-<span class="sig-name descname"><span class="pre">morlet_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/wavelet/wavelet_example.html#morlet_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wavelet.wavelet_example.morlet_wavelet_example" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="Wavelet.wavelet_example.morlet_wavelet_example">
+<span class="sig-name descname"><span class="pre">morlet_wavelet_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Wavelet/wavelet_example.html#morlet_wavelet_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Wavelet.wavelet_example.morlet_wavelet_example" title="Permalink to this definition"></a></dt>
 <dd><img alt="_images/morlet_wavelet.png" src="_images/morlet_wavelet.png" />
 </dd></dl>
 
-</section>
-<section id="module-wavelet">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wavelet" title="Permalink to this heading"></a></h2>
-</section>
+<span class="target" id="module-Wavelet"></span></section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="convolution.html" class="btn btn-neutral float-left" title="convolution package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="time_series_noise_simulation.html" class="btn btn-neutral float-right" title="time_series_noise_simulation package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Convolution.html" class="btn btn-neutral float-left" title="Convolution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Time_series_noise_simulation.html" class="btn btn-neutral float-right" title="Time_series_noise_simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

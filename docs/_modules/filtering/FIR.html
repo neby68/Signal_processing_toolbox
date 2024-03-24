@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>filtering.FIR &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+  <title>Filtering.FIR &mdash; Signal processing tools and examples 0.0.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -41,7 +41,9 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">src</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../convolution.html">convolution package</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Links:</span></p>
 <ul>
@@ -64,7 +66,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">filtering.FIR</li>
+      <li class="breadcrumb-item active">Filtering.FIR</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -73,7 +75,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for filtering.FIR</h1><div class="highlight"><pre>
+  <h1>Source code for Filtering.FIR</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
@@ -83,7 +85,7 @@
 
 <span class="c1">####################  FIR  ##########################</span>
 
-<div class="viewcode-block" id="FIR_filter_example"><a class="viewcode-back" href="../../filtering.html#filtering.FIR.FIR_filter_example">[docs]</a><span class="k">def</span> <span class="nf">FIR_filter_example</span><span class="p">():</span>
+<div class="viewcode-block" id="FIR_filter_example"><a class="viewcode-back" href="../../Filtering.html#Filtering.FIR.FIR_filter_example">[docs]</a><span class="k">def</span> <span class="nf">FIR_filter_example</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Example of FIR filter for a narrowband filter</span>
 
@@ -176,7 +178,7 @@
 <span class="c1">#%%</span>
 
 <span class="c1">####################  FIR win ##########################</span>
-<div class="viewcode-block" id="FIRwin_eample"><a class="viewcode-back" href="../../filtering.html#filtering.FIR.FIRwin_eample">[docs]</a><span class="k">def</span> <span class="nf">FIRwin_eample</span><span class="p">():</span>
+<div class="viewcode-block" id="FIRwin_eample"><a class="viewcode-back" href="../../Filtering.html#Filtering.FIR.FIRwin_eample">[docs]</a><span class="k">def</span> <span class="nf">FIRwin_eample</span><span class="p">():</span>
     <span class="c1"># filter parameters</span>
     <span class="n">srate</span>   <span class="o">=</span> <span class="mi">1024</span> <span class="c1"># hz</span>
     <span class="n">nyquist</span> <span class="o">=</span> <span class="n">srate</span><span class="o">/</span><span class="mi">2</span>

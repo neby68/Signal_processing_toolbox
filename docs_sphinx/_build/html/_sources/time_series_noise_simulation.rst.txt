@@ -1,29 +1,43 @@
-time\_series\_noise\_simulation package
-=======================================
+Time\_series\_noise\_simulation
+===============================
 
-Submodules
-----------
 
-time\_series\_noise\_simulation.chirps module
+
+chirps
 ---------------------------------------------
 
-.. automodule:: time_series_noise_simulation.chirps
+.. automodule:: Time_series_noise_simulation.chirps
    :members:
    :undoc-members:
    :show-inheritance:
 
-time\_series\_noise\_simulation.sin\_gaus\_euler\_function module
+eeg\_data
+------------------------------------------------
+
+.. automodule:: Time_series_noise_simulation.eeg_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+non\_stationary\_noise
+-------------------------------------------------------------
+
+.. automodule:: Time_series_noise_simulation.non_stationary_noise
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+sin\_gaus\_euler\_function
 -----------------------------------------------------------------
 
-.. automodule:: time_series_noise_simulation.sin_gaus_euler_function
+.. automodule:: Time_series_noise_simulation.sin_gaus_euler_function
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: time_series_noise_simulation
+
+.. automodule:: Time_series_noise_simulation
    :members:
    :undoc-members:
    :show-inheritance:

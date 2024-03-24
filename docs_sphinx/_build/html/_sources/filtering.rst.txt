@@ -1,70 +1,59 @@
-filtering package
-=================
-
-Submodules
-----------
+Filtering
+=========
 
 
 
- .. csv-table:: **FIR vs IRR**
-   :file: _static/other/FIRvsIRR.csv
-
-
-
-
-
-filtering.FIR module
+FIR
 --------------------
 
-.. automodule:: filtering.FIR
+.. automodule:: Filtering.FIR
    :members:
    :undoc-members:
    :show-inheritance:
 
-filtering.IIR module
+IIR
 --------------------
 
-.. automodule:: filtering.IIR
+.. automodule:: Filtering.IIR
    :members:
    :undoc-members:
    :show-inheritance:
 
-filtering.WindowedSinc\_filter module
+WindowedSinc\_filter
 -------------------------------------
 
-.. automodule:: filtering.WindowedSinc_filter
+.. automodule:: Filtering.WindowedSinc_filter
    :members:
    :undoc-members:
    :show-inheritance:
 
-filtering.frequency\_domain\_normalisation module
+frequency\_domain\_normalisation
 -------------------------------------------------
 
-.. automodule:: filtering.frequency_domain_normalisation
+.. automodule:: Filtering.frequency_domain_normalisation
    :members:
    :undoc-members:
    :show-inheritance:
 
-filtering.relfection module
+relfection
 ---------------------------
 
-.. automodule:: filtering.relfection
+.. automodule:: Filtering.relfection
    :members:
    :undoc-members:
    :show-inheritance:
 
-filtering.roll\_off module
+roll\_off
 --------------------------
 
-.. automodule:: filtering.roll_off
+.. automodule:: Filtering.roll_off
    :members:
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: filtering
+
+.. automodule:: Filtering
    :members:
    :undoc-members:
    :show-inheritance:
