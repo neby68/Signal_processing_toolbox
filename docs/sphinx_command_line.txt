@@ -1,0 +1,5 @@
+sphinx-apidoc -o docs/sphinx src 
+.\docs\sphinx\make.bat clean
+.\docs\sphinx\make.bat html
+.\docs\copy_past.bat
+.\docs\sphinx\_build\html\index.html

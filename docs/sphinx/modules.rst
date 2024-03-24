@@ -1,10 +1,13 @@
-src
-===
-
 .. toctree::
    :maxdepth: 4
 
    TimeSeriesDenoising
+   noise
+   Spectral_RytmicityAnalysis
+   filtering
+   convolution
+   wavelet
+   time_series_noise_simulation
 
 
 .. toctree::

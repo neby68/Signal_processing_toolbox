@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>filtering package &mdash; Signal processing tools and examples 0.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=525cde36"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="convolution package" href="convolution.html" />
+    <link rel="prev" title="Spectral_RytmicityAnalysis package" href="Spectral_RytmicityAnalysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Signal processing tools and examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="TimeSeriesDenoising.html">TimeSeriesDenoising package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="noise.html">noise package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spectral_RytmicityAnalysis.html">Spectral_RytmicityAnalysis package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">filtering package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.FIR">filtering.FIR module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.FIR.FIR_filter_example"><code class="docutils literal notranslate"><span class="pre">FIR_filter_example()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.FIR.FIRwin_eample"><code class="docutils literal notranslate"><span class="pre">FIRwin_eample()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.IIR">filtering.IIR module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.IIR.IRR_filter"><code class="docutils literal notranslate"><span class="pre">IRR_filter()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.WindowedSinc_filter">filtering.WindowedSinc_filter module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.WindowedSinc_filter.filter_data_with_sinc_window_filter_example"><code class="docutils literal notranslate"><span class="pre">filter_data_with_sinc_window_filter_example()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.WindowedSinc_filter.sinc_filter_example"><code class="docutils literal notranslate"><span class="pre">sinc_filter_example()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtering.WindowedSinc_filter.sinc_window_filter_example"><code class="docutils literal notranslate"><span class="pre">sinc_window_filter_example()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.frequency_domain_normalisation">filtering.frequency_domain_normalisation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.relfection">filtering.relfection module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering.roll_off">filtering.roll_off module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-filtering">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="convolution.html">convolution package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wavelet.html">wavelet package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time_series_noise_simulation.html">time_series_noise_simulation package</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/neby68/Signal_processing_toolbox">Git Repository</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://neby68.github.io/electrical_and_neural_signal_processing/">Electrical and neural signal processing examples' documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Signal processing tools and examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">filtering package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/filtering.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="filtering-package">
+<h1>filtering package<a class="headerlink" href="#filtering-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><table class="docutils align-default" id="id1">
+<caption><span class="caption-text"><strong>FIR vs IRR</strong></span><a class="headerlink" href="#id1" title="Permalink to this table"></a></caption>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>FIR</p></td>
+<td><p>IRR</p></td>
+</tr>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p>Finite Impulse response</p></td>
+<td><p>Infinite impulse response</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kernel length</p></td>
+<td><p>long</p></td>
+<td><p>short</p></td>
+</tr>
+<tr class="row-even"><td><p>speed</p></td>
+<td><p>slower</p></td>
+<td><p>fast</p></td>
+</tr>
+<tr class="row-odd"><td><p>stability</p></td>
+<td><p>high</p></td>
+<td><p>data-dependent</p></td>
+</tr>
+<tr class="row-even"><td><p>mechanism</p></td>
+<td><p>multiply data with kernel</p></td>
+<td><p>multiply data with kernel a then b</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</section>
+<section id="module-filtering.FIR">
+<span id="filtering-fir-module"></span><h2>filtering.FIR module<a class="headerlink" href="#module-filtering.FIR" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.FIR.FIR_filter_example">
+<span class="sig-name descname"><span class="pre">FIR_filter_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/FIR.html#FIR_filter_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.FIR.FIR_filter_example" title="Permalink to this definition"></a></dt>
+<dd><p>Example of FIR filter for a narrowband filter</p>
+<p><strong>1. Creation of the filter kernel using FIR funtion</strong></p>
+<ul class="simple">
+<li><p>Creation of the input of the FIR function</p></li>
+</ul>
+<img alt="_images/FIR_input.png" src="_images/FIR_input.png" />
+<ul class="simple">
+<li><p>Output of the FIR function is the kernel</p></li>
+</ul>
+<img alt="_images/FIR_kernel.png" src="_images/FIR_kernel.png" />
+<p><strong>2. Analysis of the frequency response</strong></p>
+<ul class="simple">
+<li><p>Analysis of the frequency response in comparison of the ideal response</p></li>
+</ul>
+<img alt="_images/FIR_frequency_response.png" src="_images/FIR_frequency_response.png" />
+<ul class="simple">
+<li><p>In dB (it allows to see more details)</p></li>
+</ul>
+<img alt="_images/FIR_frequency_response_log.png" src="_images/FIR_frequency_response_log.png" />
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.FIR.FIRwin_eample">
+<span class="sig-name descname"><span class="pre">FIRwin_eample</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/FIR.html#FIRwin_eample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.FIR.FIRwin_eample" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-filtering.IIR">
+<span id="filtering-iir-module"></span><h2>filtering.IIR module<a class="headerlink" href="#module-filtering.IIR" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.IIR.IRR_filter">
+<span class="sig-name descname"><span class="pre">IRR_filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/IIR.html#IRR_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.IIR.IRR_filter" title="Permalink to this definition"></a></dt>
+<dd><p><strong>1. Creation of the filter kernel using butter funtion</strong></p>
+<p>The IRR filter are composed of two kernel, often call “a” and “b”.</p>
+<img alt="_images/IIR_kernel.png" src="_images/IIR_kernel.png" />
+<p><strong>2. Analysis of the frequency response</strong></p>
+<img alt="_images/IIR_frequency_response_wrong.png" src="_images/IIR_frequency_response_wrong.png" />
+<p>As IRR kernel are from very little order (comparing to FIR)</p>
+<dl class="simple">
+<dt>e.g. butter filter from order 4 means the Kernel signal will be composed</dt><dd><p>of only 4*2+1 points.
+These lead in only 6 point in the frequency domain.</p>
+</dd>
+</dl>
+<p>A better way to evaluate the kernel function is to filter a basic impulse response (arr = [0, 0, 1, 0, 0])
+and take a look at its frequency response</p>
+<img alt="_images/IIR_filter_an_Impulse.png" src="_images/IIR_filter_an_Impulse.png" />
+<img alt="_images/IRR_frequency_response.png" src="_images/IRR_frequency_response.png" />
+<img alt="_images/IRR_frequency_response_log.png" src="_images/IRR_frequency_response_log.png" />
+</dd></dl>
+
+</section>
+<section id="module-filtering.WindowedSinc_filter">
+<span id="filtering-windowedsinc-filter-module"></span><h2>filtering.WindowedSinc_filter module<a class="headerlink" href="#module-filtering.WindowedSinc_filter" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.WindowedSinc_filter.filter_data_with_sinc_window_filter_example">
+<span class="sig-name descname"><span class="pre">filter_data_with_sinc_window_filter_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/WindowedSinc_filter.html#filter_data_with_sinc_window_filter_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.WindowedSinc_filter.filter_data_with_sinc_window_filter_example" title="Permalink to this definition"></a></dt>
+<dd><p><strong>Example of the windowed sinc low pass filter on real signal:</strong></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.WindowedSinc_filter.sinc_filter_example">
+<span class="sig-name descname"><span class="pre">sinc_filter_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/WindowedSinc_filter.html#sinc_filter_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.WindowedSinc_filter.sinc_filter_example" title="Permalink to this definition"></a></dt>
+<dd><div class="math notranslate nohighlight">
+\[\text{sinc}(t) = \frac{\sin(2 \pi f_c t)}{t}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[f_c : \text{cut-off frequency},
+t : \text{timestamps}\]</div>
+<img alt="_images/Sinc_kernel_and_frequency_response.png" src="_images/Sinc_kernel_and_frequency_response.png" />
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="filtering.WindowedSinc_filter.sinc_window_filter_example">
+<span class="sig-name descname"><span class="pre">sinc_window_filter_example</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/filtering/WindowedSinc_filter.html#sinc_window_filter_example"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#filtering.WindowedSinc_filter.sinc_window_filter_example" title="Permalink to this definition"></a></dt>
+<dd><p>The sinc filter can be improved by multipling a window with itself.</p>
+<p>Different window exist with different caracteristics:</p>
+<ul class="simple">
+<li><p>Hann (hanning)</p></li>
+<li><p>Hamming</p></li>
+<li><p>Gaus</p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="module-filtering.frequency_domain_normalisation">
+<span id="filtering-frequency-domain-normalisation-module"></span><h2>filtering.frequency_domain_normalisation module<a class="headerlink" href="#module-filtering.frequency_domain_normalisation" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-filtering.relfection">
+<span id="filtering-relfection-module"></span><h2>filtering.relfection module<a class="headerlink" href="#module-filtering.relfection" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-filtering.roll_off">
+<span id="filtering-roll-off-module"></span><h2>filtering.roll_off module<a class="headerlink" href="#module-filtering.roll_off" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-filtering">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-filtering" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Spectral_RytmicityAnalysis.html" class="btn btn-neutral float-left" title="Spectral_RytmicityAnalysis package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="convolution.html" class="btn btn-neutral float-right" title="convolution package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Nicolas Eby.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
