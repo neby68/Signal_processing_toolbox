@@ -1,6 +1,0 @@
-﻿,FIR,IRR
-Name,Finite Impulse response,Infinite impulse response
-Kernel length,long,short
-speed,slower,fast
-stability,high,data-dependent
-mechanism,multiply data with kernel,multiply data with kernel a then b
