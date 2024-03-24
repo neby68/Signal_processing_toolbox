@@ -31,9 +31,3 @@ This page may be referenced by the `Electrical and neural signal processing exam
    Git Repository <https://github.com/neby68/Signal_processing_toolbox>
    Electrical and neural signal processing examples' documentation <https://neby68.github.io/electrical_and_neural_signal_processing/>
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
